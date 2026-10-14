@@ -19,8 +19,8 @@ from matplotlib.animation import FuncAnimation
 # ---- Settings you might change ----
 PORT = "/dev/cu.usbmodem11301"   # check with: ls /dev/cu.usbmodem*
 BAUD = 115200
-COLUMNS = ["t_ms", "ax", "ay", "az", "gx", "gy", "gz"]  # must match the Arduino's CSV order
-PLOT_COLUMNS = ["ax", "ay", "az"]                       # which ones to draw
+COLUMNS = ["t_ms", "gx", "accel_angle", "gyro_angle", "filt_angle"]  # must match the Arduino's CSV order
+PLOT_COLUMNS = ["accel_angle", "gyro_angle", "filt_angle"]   # which ones to draw
 WINDOW = 300                                            # how many recent samples to show
 
 # ---- Open the serial port and the log file ----
@@ -51,7 +51,7 @@ def read_available_lines():
         lines_read += 1
         parts = raw_bytes.decode("utf-8", errors="ignore").strip().split(",")
         if len(parts) != len(COLUMNS):
-            continue          # skip text lines like "t_ms,ax,..." or partial lines
+            continue          # skip text lines like the header or partial lines
         try:
             values = [float(p) for p in parts]
         except ValueError:
@@ -66,7 +66,7 @@ def read_available_lines():
 fig, ax = plt.subplots()
 lines = {name: ax.plot([], [], label=name)[0] for name in PLOT_COLUMNS}
 ax.set_xlabel("time (s)")
-ax.set_ylabel("value")
+ax.set_ylabel("angle (deg)")
 ax.legend(loc="upper left")
 ax.grid(True)
 

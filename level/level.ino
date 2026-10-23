@@ -31,7 +31,7 @@ const float GYRO_SIGN     = 1.0;    // flip to -1.0 if the gyro fights the accel
 const float DIRECTION     = 1.0;    // flip to -1.0 if the servo runs away from level
 const float ANGLE_OFFSET  = 0.0;    // degrees; set to accel_deg's reading when the card is truly level
 const float KI            = 3.0;    // servo degrees per second, per degree of tilt error
-const float DEADBAND_DEG  = 0.3;    // ignore errors smaller than this (stops jitter from gear slop)
+const float DEADBAND_DEG  = 0.5;    // ignore errors smaller than this (stops jitter from gear slop)
 const float ALPHA         = 0.98;   // complementary filter: 98% gyro, 2% accelerometer
 const unsigned long LOOP_US = 5000; // 5000 microseconds = 200 Hz control loop
 
@@ -108,6 +108,7 @@ void setup() {
   if (SERVO_ENABLED) {
     platformServo.attach(SERVO_PIN);
     platformServo.write((int)servoCmd);
+    delay(1500);   // let the servo finish moving and the card stop swinging before calibrating
   }
 
   // Gyro bias calibration: hold still while we average 500 readings

@@ -57,3 +57,6 @@ Leveling error = worst |filt_deg| over the last 10 s of a 15-s run.
 - Uploaded sweep.ino by accident at first: the board always runs the last uploaded sketch.
 - Placing and removing the phone (to read the tilt) during calibration shook the box.
   Fix: read the tilt, remove the phone, wait 3 s, then start the run.
+
+## Demo video
+https://youtu.be/GUl8yr4yl0U

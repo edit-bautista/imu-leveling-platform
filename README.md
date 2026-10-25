@@ -52,6 +52,10 @@ Measured with `telemetry/measure_level.py`: 15-second runs, first 5 s skipped wh
 | ~20° | ±0.18° | −0.14° | 108.8 |
 | ~30° | ±0.46° | +0.43° | 118.3 |
 
+![Platform tilt vs. time at 0, 10, 20 and 30° base tilt](plots/leveling.png)
+
+All four runs stay inside the ±3° spec. The 10° run shows a limit cycle (slow creep, then a sudden snap) caused by gear backlash in the SG90; that's where the ±2.62° worst case comes from. Analysis: [`analysis/leveling.ipynb`](analysis/leveling.ipynb).
+
 | Spec | Target | Measured | |
 | --- | --- | --- | --- |
 | Leveling error | ±3° at up to 30° tilt | **±2.6°** worst case | ✅ |
